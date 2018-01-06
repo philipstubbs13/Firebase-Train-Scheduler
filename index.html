@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Train Scheduler</title>
+
+	<!--Bootstrap CDN link-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+	<!--Bootswatch link-->
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
+
+	<!--Reset css file-->
+	<!--<link rel="stylesheet" type="text/css" href="assets/css/reset.css">-->
+
+	<!--Google Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<!--External css file-->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!--JQuery link-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!--Font Awesome link-->
+	<script src="https://use.fontawesome.com/abd289e58f.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card mb-4 bg-primary">
+					<div class="card-body text-white">
+				    	<h1 class="card-title text-center">Train scheduler</h1>
+				    	<h5 class="card-text"></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-4">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header bg-primary text-white">
+					Current train schedule
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-3" id="train-name-col">
+								<p>Train name</p>
+							</div>
+
+							<div class="col-md-3" id="dest-col">
+								<p>Destination</p>
+							</div>
+
+							<div class="col-md-2" id="freq-col">
+								<p>Frequency (min)</p>
+							</div>
+
+							<div class="col-md-2" id="arrival-col">
+								<p>Next arrival</p>
+							</div>
+
+							<div class="col-md-2" id="min-col">
+								<p>Minutes away</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header bg-primary text-white">
+					Add train
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="form-group">
+						    	<label for="trainName">Name of train</label>
+						    	<input type="text" class="form-control" id="train-name" placeholder="">
+						  	</div>
+						  	<div class="form-group">
+						    	<label for="destination">Destination</label>
+						    	<input type="text" class="form-control" id="destination" placeholder="">
+						  	</div>
+						  	<div class="form-group">
+						    	<label for="firstTrainTime">First Train Time (HH:mm - military time)</label>
+						    	<input type="text" class="form-control" id="first-train-time" placeholder="HH:mm">
+						  	</div>
+						  	<div class="form-group">
+						    	<label for="firstTrainTime">Frequency (min)</label>
+						    	<input type="text" class="form-control" id="frequency" placeholder="">
+						  	</div>
+						  	<button type="submit" class="btn btn-primary rounded">Submit</button>
+						</form>
+		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
