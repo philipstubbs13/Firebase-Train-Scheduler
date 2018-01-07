@@ -109,3 +109,31 @@ database.ref().on("child_added", function(snapshot) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+//OpenWeatherMap API
+//Code for "Current weather" section.
+$( document ).ready(function() {
+    var appID = "beed4816a780902e0944aec50f172e2a";
+
+    $(".query_btn").click(function(){
+        var query_param = $(this).prev().val();
+
+        if ($(this).prev().attr("placeholder") == "City") {
+            var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
+        } else if ($(this).prev().attr("placeholder") == "Zip Code") {
+            var weather = "http://api.openweathermap.org/data/2.5/weather?zip=" + query_param + "&APPID=" + appID;
+        }
+
+        $.getJSON(weather,function(json){
+            $("#city").html("City: " + json.name);
+            $("#main_weather").html("Main weather: " + json.weather[0].main);
+            $("#description_weather").html("Description: " + json.weather[0].description);
+            //$("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
+            var K = json.main.temp;
+      		var F = Math.floor((K - 273.15) * 1.80 + 32);
+      		// Create CODE HERE to dump the temperature content into HTML
+      		$("#temperature").html("Temperature(F): "  + F);
+        	});
+    })
+});
