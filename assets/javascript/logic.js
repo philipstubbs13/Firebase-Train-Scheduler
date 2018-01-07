@@ -23,7 +23,6 @@ var config = {
  var tMinutesTillTrain = "";
  var tRow = "";
  var getKey = "";
- //var ref = new Firebase("https://fir-train-scheduler-7f4a9.firebaseio.com");
 
  //Create database variable to create reference to firebase.database().
  var database = firebase.database();
@@ -46,46 +45,74 @@ var config = {
 	console.log(firstTrainTime);
 	console.log(frequency);
 
-	// First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
-    console.log(firstTimeConverted);
+	//Form validation for user input values. To add a train, all fields are required.
+	//Check that all fields are filled out.
+	if (trainName === "" || destination === "" || firstTrainTime === "" || frequency === ""){
+		$("#not-military-time").empty();
+		$("#missing-field").html("ALL fields are required to add a train to the schedule.");
+		return false;		
+	}
 
-    // Current Time
-    var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+	//Check to make sure that there are no null values in the form.
+	else if (trainName === null || destination === null || firstTrainTime === null || frequency === null){
+		$("#not-military-time").empty();
+		$("#missing-field").html("ALL fields are required to add a train to the schedule.");
+		return false;		
+	}
 
-    // Difference between the times
-    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
+	//Check that the user enters the first train time as military time.
+	else if (firstTrainTime.length !== 5 || firstTrainTime.substring(2,3)!== ":") {
+		$("#missing-field").empty();
+		$("#not-military-time").html("Use military time. For example, 15:00.");
+		return false;
+	}
 
-    // Time apart (remainder)
-    var tRemainder = diffTime % frequency;
-    console.log(tRemainder);
+	else{
+		$("#not-military-time").empty();
+		$("#missing-field").empty();
+		//Moment JS math caclulations to determine train next arrival time and the number of minutes away from destination.
+		// First Time (pushed back 1 year to make sure it comes before current time)
+	    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
+	    console.log(firstTimeConverted);
 
-    // Minute Until Train
-    var tMinutesTillTrain = frequency - tRemainder;
-    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+	    // Current Time
+	    var currentTime = moment();
+	    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-    // Next Train
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+	    // Difference between the times
+	    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+	    console.log("DIFFERENCE IN TIME: " + diffTime);
 
-	//Remove the text from the form boxes after user presses submit button.
-	$("#train-name").val("");
-	$("#destination").val("");
-	$("#first-train-time").val("");
-	$("#frequency").val("");
+	    // Time apart (remainder)
+	    var tRemainder = diffTime % frequency;
+	    console.log(tRemainder);
 
-	//Save the user values in Firebase database.
-	database.ref().push({
-		train: trainName,
-		dest: destination,
-		firstTrain: firstTrainTime,
-		trainFrequency: frequency,
-		nextTrain: nextTrain,
-		tMinutesTillTrain: tMinutesTillTrain
-	})
+	    // Minute Until Train
+	    var tMinutesTillTrain = frequency - tRemainder;
+	    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+	    // Next Train
+	    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
+	    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+		//Remove the text from the form boxes after user presses submit button.
+		$("#train-name").val("");
+		$("#destination").val("");
+		$("#first-train-time").val("");
+		$("#frequency").val("");
+
+		//Save the user values in Firebase database.
+		database.ref().push({
+			train: trainName,
+			dest: destination,
+			firstTrain: firstTrainTime,
+			trainFrequency: frequency,
+			nextTrain: nextTrain,
+			tMinutesTillTrain: tMinutesTillTrain
+		})
+	}
 });
+
 
 // At the initial load and subsequent value changes, get a snapshot of the stored data.
 // This function allows you to update the page in real-time when the firebase database changes.

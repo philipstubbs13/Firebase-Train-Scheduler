@@ -10,3 +10,7 @@ label {
 	width:  25px;
 	height: 25px;
 }
+
+.form-validation {
+	color: red;
+}

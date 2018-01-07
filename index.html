@@ -96,6 +96,7 @@
 						  	<div class="form-group">
 						  		<!--Hover over the help icon to see tooltip-->
 						    	<label for="firstTrainTime">First train time (HH:mm - military time) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enter the first time that the train leaves (specify in military time)."></i></label>
+						    	<small id="not-military-time" class="form-validation"></small>
 						    	<input type="text" class="form-control" id="first-train-time" placeholder="HH:mm">
 						  	</div>
 						  	<div class="form-group">
@@ -103,6 +104,7 @@
 						    	<label for="firstTrainTime">Frequency (min) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="How often (in minutes) the train leaves."></i></label>
 						    	<input type="text" class="form-control" id="frequency" placeholder="">
 						  	</div>
+						  	<p id="missing-field" class="form-validation"></p>
 						  	<button type="submit" class="btn btn-primary rounded" id="submit-button">Add to schedule</button>
 						</form>
 		
