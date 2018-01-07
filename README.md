@@ -40,8 +40,6 @@ A train schedule application that incorporates Firebase to host arrival and depa
 ## Tooltips
 <p>This site uses tooltips to provide additional help information for each field in the <b>Add train</b> form and for each column in the <b>Current train schedule</b>. A tooltip is a graphical user interface element that is commonly used in web based projects. It is used in conjunction with a cursor, usually a pointer. To see the tooltip content, the user hovers the pointer over the help icon, without clicking it, and a tooltip appears — a small "hover box" with information about a certain field.</p>
 
-<i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The name of the train."></i>
-
 <p>For more information on how to incorporate tooltips into a web application, see the <a href="https://getbootstrap.com/docs/4.0/components/tooltips/" target="_blank">Bootstrap documentation</a>.</p>
 
 ## Future feature enhancements
