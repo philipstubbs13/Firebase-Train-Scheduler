@@ -67,9 +67,11 @@ database.ref().on("child_added", function(snapshot) {
     var destTd = $("<td>").text(dest);
     var firstTrainTd = $("<td>").text(firstTrain);
     var trainFrequencyTd = $("<td>").text(trainFrequency);
+    var minutesAwayTd = $("<td>").text("test");
 
-    // Append the newly created table data to the table row
-    tRow.append(trainTd, destTd, trainFrequencyTd, firstTrainTd,);
+    // Append the newly created table data to the table row.
+    //Append trash can icon to each row so that user can delete row if needed.
+    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' id='trash-can'>", trainTd, destTd, trainFrequencyTd, firstTrainTd, minutesAwayTd);
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
 
