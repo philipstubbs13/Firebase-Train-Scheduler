@@ -6,7 +6,7 @@ label {
 	font-weight: bold;
 }
 
-#trash-can {
+.trash-can {
 	width:  25px;
 	height: 25px;
 }

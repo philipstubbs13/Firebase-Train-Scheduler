@@ -14,6 +14,14 @@ var config = {
  };
  firebase.initializeApp(config);
 
+ //Variables
+ var train ="";
+ var dest="";
+ var firstTrain="";
+ var trainFrequency="";
+ var tRow = "";
+ var getKey = "";
+
  //Create database variable to create reference to firebase.database().
  var database = firebase.database();
 
@@ -56,7 +64,7 @@ database.ref().on("child_added", function(snapshot) {
 	console.log(snapshot.val());
 
 	//Set variables for form input field values equal to the stored values in firebase.
-	train = (snapshot.val().train);
+	train = snapshot.val().train;
 	dest = snapshot.val().dest;
 	firstTrain = snapshot.val().firstTrain;
 	trainFrequency = snapshot.val().trainFrequency;
@@ -71,8 +79,17 @@ database.ref().on("child_added", function(snapshot) {
 
     // Append the newly created table data to the table row.
     //Append trash can icon to each row so that user can delete row if needed.
-    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' id='trash-can'>", trainTd, destTd, trainFrequencyTd, firstTrainTd, minutesAwayTd);
+    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can'>", trainTd, destTd, trainFrequencyTd, firstTrainTd, minutesAwayTd);
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
 
+});
+
+//Click event for trash can icon/button. When user clicks trash can to remove a train from the schedule...
+ $("body").on("click", ".trash-can", function(){
+	// Prevent form from submitting
+	event.preventDefault();
+	$(this).closest('tr').remove();
+	getKey = $(this).parent().parent().attr('id');
+	//dataRef.child(getKey).remove();
 });
