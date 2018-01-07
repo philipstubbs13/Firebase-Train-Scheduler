@@ -67,7 +67,7 @@ var config = {
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
     // Next Train
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
 	//Remove the text from the form boxes after user presses submit button.
@@ -82,7 +82,7 @@ var config = {
 		dest: destination,
 		firstTrain: firstTrainTime,
 		trainFrequency: frequency,
-		nextTrain: nextTrain.toLocaleString(),
+		nextTrain: nextTrain,
 		tMinutesTillTrain: tMinutesTillTrain
 	})
 });
