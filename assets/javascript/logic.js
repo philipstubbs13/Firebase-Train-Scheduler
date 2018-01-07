@@ -30,4 +30,28 @@ var config = {
 	console.log(destination);
 	console.log(firstTrainTime);
 	console.log(frequency);
+
+	//Save the user values in Firebase database.
+	database.ref().push({
+		train: trainName,
+		dest: destination,
+		firstTrain: firstTrainTime,
+		trainFrequency: frequency
+	})
+});
+
+// At the initial load and subsequent value changes, get a snapshot of the stored data.
+// This function allows you to update the page in real-time when the firebase database changes.
+database.ref().on("value", function(snapshot) {
+	console.log(snapshot.val());
+
+	//Set variables for form input field values equal to the stored values in firebase.
+	train = snapshot.val().train;
+	console.log(train);
+	dest = snapshot.val().dest;
+	firstTrain = snapshot.val().firstTrain;
+	trainFrequency = snapshot.val().trainFrequency;
+
+	//Update the HTML (schedule table) to reflect the latest stored values in the firebase database.
+	$("#train-name-col").html(train);
 });
