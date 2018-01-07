@@ -1,3 +1,7 @@
+//Names of passenger trains in the US for app testing purposes.
+	//New York Central, Milwaukee Railroad, Illinois Central, New Haven Railroad, Michigan Central Railroad, Santa Fe, Union Pacific Railroad
+	//Florida East Coast Railway, Southern Pacific, Pennsylvania Railroad, Canada Pacific Railway, St. Louis-San Francisco Railway, Pere Marquette Railway, Alaska Railroad.
+	//https://en.wikipedia.org/wiki/List_of_named_passenger_trains_of_the_United_States_(I%E2%80%93M)
 //Initialize Firebase database
 // Initialize Firebase
 var config = {
@@ -31,6 +35,12 @@ var config = {
 	console.log(firstTrainTime);
 	console.log(frequency);
 
+	//Remove the text from the form boxes after user presses submit button.
+	$("#train-name").val("");
+	$("#destination").val("");
+	$("#first-train-time").val("");
+	$("#frequency").val("");
+
 	//Save the user values in Firebase database.
 	database.ref().push({
 		train: trainName,
@@ -42,16 +52,25 @@ var config = {
 
 // At the initial load and subsequent value changes, get a snapshot of the stored data.
 // This function allows you to update the page in real-time when the firebase database changes.
-database.ref().on("value", function(snapshot) {
+database.ref().on("child_added", function(snapshot) {
 	console.log(snapshot.val());
 
 	//Set variables for form input field values equal to the stored values in firebase.
-	train = snapshot.val().train;
-	console.log(train);
+	train = (snapshot.val().train);
 	dest = snapshot.val().dest;
 	firstTrain = snapshot.val().firstTrain;
 	trainFrequency = snapshot.val().trainFrequency;
 
 	//Update the HTML (schedule table) to reflect the latest stored values in the firebase database.
-	$("#train-name-col").html(train);
+	var tRow = $("<tr>");
+	var trainTd = $("<td>").text(train);
+    var destTd = $("<td>").text(dest);
+    var firstTrainTd = $("<td>").text(firstTrain);
+    var trainFrequencyTd = $("<td>").text(trainFrequency);
+
+    // Append the newly created table data to the table row
+    tRow.append(trainTd, destTd, trainFrequencyTd, firstTrainTd,);
+    // Append the table row to the table body
+    $("#schedule-body").append(tRow);
+
 });
