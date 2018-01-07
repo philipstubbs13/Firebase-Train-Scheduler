@@ -30,7 +30,9 @@ A train schedule application that incorporates Firebase to host arrival and depa
 
 ### Adding a train to the schedule
 
-### Removing a train from the schedule.
+### Removing a train from the schedule
+
+### Updating the train schedule
 
 ## Future feature enhancements
 <ul>
@@ -41,5 +43,5 @@ A train schedule application that incorporates Firebase to host arrival and depa
 </ul>
 
 ## Feedback
-<p>Feel free to send feedback via <a href="https://twitter.com/iamPhilStubbs" target="_blank">Twitter</a>, email (philipstubbs13@gmail.com), or <a href="https://github.com/philipstubbs13/Giphy-API-Project/issues/" target="_blank">file an issue</a>. Feature requests are always welcome. If you wish to contribute, please send an email with your request to philipstubbs13@gmail.com to discuss.</p>
+<p>Feel free to send feedback via <a href="https://twitter.com/iamPhilStubbs" target="_blank">Twitter</a>, email (philipstubbs13@gmail.com), or <a href="https://github.com/philipstubbs13/Firebase-Train-Scheduler/issues/" target="_blank">file an issue</a>. Feature requests are always welcome. If you wish to contribute, please send an email with your request to philipstubbs13@gmail.com to discuss.</p>
 
