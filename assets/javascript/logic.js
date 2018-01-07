@@ -19,6 +19,8 @@ var config = {
  var dest="";
  var firstTrain="";
  var trainFrequency="";
+ var nextTrain = "";
+ var tMinutesTillTrain = "";
  var tRow = "";
  var getKey = "";
  //var ref = new Firebase("https://fir-train-scheduler-7f4a9.firebaseio.com");
@@ -44,6 +46,30 @@ var config = {
 	console.log(firstTrainTime);
 	console.log(frequency);
 
+	// First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % frequency;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = frequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
 	//Remove the text from the form boxes after user presses submit button.
 	$("#train-name").val("");
 	$("#destination").val("");
@@ -55,7 +81,9 @@ var config = {
 		train: trainName,
 		dest: destination,
 		firstTrain: firstTrainTime,
-		trainFrequency: frequency
+		trainFrequency: frequency,
+		nextTrain: nextTrain.toLocaleString(),
+		tMinutesTillTrain: tMinutesTillTrain
 	})
 });
 
@@ -69,18 +97,20 @@ database.ref().on("child_added", function(snapshot) {
 	dest = snapshot.val().dest;
 	firstTrain = snapshot.val().firstTrain;
 	trainFrequency = snapshot.val().trainFrequency;
+	nextTrain = snapshot.val().nextTrain;
+	tMinutesTillTrain = snapshot.val().tMinutesTillTrain;
 
 	//Update the HTML (schedule table) to reflect the latest stored values in the firebase database.
 	var tRow = $("<tr>");
 	var trainTd = $("<td>").text(train);
     var destTd = $("<td>").text(dest);
-    var firstTrainTd = $("<td>").text(firstTrain);
+    var nextTrainTd = $("<td>").text(nextTrain);
     var trainFrequencyTd = $("<td>").text(trainFrequency);
-    var minutesAwayTd = $("<td>").text("test");
+    var tMinutesTillTrainTd = $("<td>").text(tMinutesTillTrain);
 
     // Append the newly created table data to the table row.
     //Append trash can icon to each row so that user can delete row if needed.
-    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", "<i class='fa fa-pencil' aria-hidden='true'></i>", trainTd, destTd, trainFrequencyTd, firstTrainTd, minutesAwayTd);
+    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", "<i class='fa fa-pencil' aria-hidden='true'></i>", trainTd, destTd, trainFrequencyTd, nextTrainTd, tMinutesTillTrainTd);
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
 
