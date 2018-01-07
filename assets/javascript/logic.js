@@ -21,6 +21,7 @@ var config = {
  var trainFrequency="";
  var tRow = "";
  var getKey = "";
+ //var ref = new Firebase("https://fir-train-scheduler-7f4a9.firebaseio.com");
 
  //Create database variable to create reference to firebase.database().
  var database = firebase.database();
@@ -89,7 +90,17 @@ database.ref().on("child_added", function(snapshot) {
  $("body").on("click", ".trash-can", function(){
 	// Prevent form from submitting
 	event.preventDefault();
+
+	//confirm with the user before he or she decides to actually delete data.
+	var confirmDelete = confirm("Are you sure you want to delete this train?");
+	if (confirmDelete) {
 	$(this).closest('tr').remove();
-	getKey = $(this).parent().parent().attr('id');
-	//dataRef.child(getKey).remove();
+	getKey = $(this).parent().attr('id');
+	console.log(getKey);
+	//dataRef.child(key).remove();
+	//database.ref().child(getKey).remove();
+	}
+	else {
+		return;
+	}
 });
