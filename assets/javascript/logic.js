@@ -14,18 +14,20 @@ var config = {
  };
  firebase.initializeApp(config);
 
- //Variables
- var train ="";
- var dest="";
- var firstTrain="";
+ //Create database variable to create reference to firebase.database().
+ var database = firebase.database();
+
+ //Create variables
+ var trainName ="";
+ var destination="";
+ var firstTrainTime="";
  var trainFrequency="";
  var nextTrain = "";
  var tMinutesTillTrain = "";
+
  var tRow = "";
  var getKey = "";
 
- //Create database variable to create reference to firebase.database().
- var database = firebase.database();
 
  //Click event for submit button. When user clicks Submit button to add a train to the schedule...
  $("#submit-button").on("click", function() {
@@ -37,24 +39,24 @@ var config = {
 	var trainName = $("#train-name").val().trim();
 	var destination = $("#destination").val().trim();
 	var firstTrainTime = $("#first-train-time").val().trim();
-	var frequency = $("#frequency").val().trim();
+	var trainFrequency = $("#frequency").val().trim();
 
 	//Print the values that the user enters in the text boxes to the console for debugging purposes.
 	console.log(trainName);
 	console.log(destination);
 	console.log(firstTrainTime);
-	console.log(frequency);
+	console.log(trainFrequency);
 
 	//Form validation for user input values. To add a train, all fields are required.
 	//Check that all fields are filled out.
-	if (trainName === "" || destination === "" || firstTrainTime === "" || frequency === ""){
+	if (trainName === "" || destination === "" || firstTrainTime === "" || trainFrequency === ""){
 		$("#not-military-time").empty();
 		$("#missing-field").html("ALL fields are required to add a train to the schedule.");
 		return false;		
 	}
 
 	//Check to make sure that there are no null values in the form.
-	else if (trainName === null || destination === null || firstTrainTime === null || frequency === null){
+	else if (trainName === null || destination === null || firstTrainTime === null || trainFrequency === null){
 		$("#not-military-time").empty();
 		$("#missing-field").html("ALL fields are required to add a train to the schedule.");
 		return false;		
@@ -84,18 +86,18 @@ var config = {
 	    console.log("DIFFERENCE IN TIME: " + diffTime);
 
 	    // Time apart (remainder)
-	    var tRemainder = diffTime % frequency;
+	    var tRemainder = diffTime % trainFrequency;
 	    console.log(tRemainder);
 
 	    // Minute Until Train
-	    var tMinutesTillTrain = frequency - tRemainder;
+	    var tMinutesTillTrain = trainFrequency - tRemainder;
 	    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
 	    // Next Train
 	    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
 	    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-		//Remove the text from the form boxes after user presses submit button.
+		//Remove the text from the form boxes after user presses the add to schedule button.
 		$("#train-name").val("");
 		$("#destination").val("");
 		$("#first-train-time").val("");
@@ -103,10 +105,10 @@ var config = {
 
 		//Save the user values in Firebase database.
 		database.ref().push({
-			train: trainName,
-			dest: destination,
-			firstTrain: firstTrainTime,
-			trainFrequency: frequency,
+			trainName: trainName,
+			destination: destination,
+			firstTrainTime: firstTrainTime,
+			trainFrequency: trainFrequency,
 			nextTrain: nextTrain,
 			tMinutesTillTrain: tMinutesTillTrain
 		})
@@ -120,17 +122,17 @@ database.ref().on("child_added", function(snapshot) {
 	console.log(snapshot.val());
 
 	//Set variables for form input field values equal to the stored values in firebase.
-	train = snapshot.val().train;
-	dest = snapshot.val().dest;
-	firstTrain = snapshot.val().firstTrain;
+	trainName = snapshot.val().trainName;
+	destination = snapshot.val().destination;
+	firstTrainTime = snapshot.val().firstTrain;
 	trainFrequency = snapshot.val().trainFrequency;
 	nextTrain = snapshot.val().nextTrain;
 	tMinutesTillTrain = snapshot.val().tMinutesTillTrain;
 
 	//Update the HTML (schedule table) to reflect the latest stored values in the firebase database.
 	var tRow = $("<tr>");
-	var trainTd = $("<td>").text(train);
-    var destTd = $("<td>").text(dest);
+	var trainTd = $("<td>").text(trainName);
+    var destTd = $("<td>").text(destination);
     var nextTrainTd = $("<td>").text(nextTrain);
     var trainFrequencyTd = $("<td>").text(trainFrequency);
     var tMinutesTillTrainTd = $("<td>").text(tMinutesTillTrain);
@@ -148,15 +150,18 @@ database.ref().on("child_added", function(snapshot) {
 	// Prevent form from submitting
 	event.preventDefault();
 
-	//confirm with the user before he or she decides to actually delete data.
-	var confirmDelete = confirm("Are you sure you want to delete this train?");
+	//confirm with the user before he or she decides to actually delete the train data.
+	var confirmDelete = confirm("Deleting a train permanently removes the train from the system. Are you sure you want to delete this train?");
+	//If user confirms...
 	if (confirmDelete) {
-	$(this).closest('tr').remove();
-	getKey = $(this).parent().attr('id');
-	console.log(getKey);
-	//dataRef.child(key).remove();
-	//database.ref().child(getKey).remove();
+		//Remove the closest table row.
+		$(this).closest('tr').remove();
+		getKey = $(this).parent().attr('id');
+		console.log(getKey);
+		//dataRef.child(key).remove();
+		//database.ref().child(getKey).remove();
 	}
+
 	else {
 		return;
 	}
@@ -187,9 +192,10 @@ $( document ).ready(function() {
             $("#main_weather").html("Main weather: " + json.weather[0].main);
             $("#description_weather").html("Description: " + json.weather[0].description);
             //$("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
+            //Since the OpenWeatherMap API returns the temperature in kelvin, we need to convert the temperature to fahrenheit first before we display it to the html.
             var K = json.main.temp;
       		var F = Math.floor((K - 273.15) * 1.80 + 32);
-      		// Create CODE HERE to dump the temperature content into HTML
+      		// Add the temperature content to the HTML
       		$("#temperature").html("Temperature(F): "  + F);
         	});
     })
