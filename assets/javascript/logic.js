@@ -58,6 +58,7 @@ var config = {
 	//Check to make sure that there are no null values in the form.
 	else if (trainName === null || destination === null || firstTrainTime === null || trainFrequency === null){
 		$("#not-military-time").empty();
+		$("#not-a-number").empty();
 		$("#missing-field").html("ALL fields are required to add a train to the schedule.");
 		return false;		
 	}
@@ -65,11 +66,19 @@ var config = {
 	//Check that the user enters the first train time as military time.
 	else if (firstTrainTime.length !== 5 || firstTrainTime.substring(2,3)!== ":") {
 		$("#missing-field").empty();
+		$("#not-a-number").empty();
 		$("#not-military-time").html("Time must be in military format: HH:mm. For example, 15:00.");
 		return false;
 	}
 
-	else{
+	else if (isNaN(trainFrequency)) {
+    	$("#missing-field").empty();
+    	$("#not-military-time").empty();
+    	$("#not-a-number").html("Not a number. Enter a number (in minutes).");
+    	return false;
+	}
+
+	else {
 		$("#not-military-time").empty();
 		$("#missing-field").empty();
 
@@ -196,6 +205,8 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", "<i class='fa fa-pencil' aria-hidden='true'></i>", trainTd, destTd, trainFrequencyTd, nextTrainTd, tMinutesTillTrainTd);
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
+    //Current time
+    $("#current-time").html("Current time: " + currentTime);
 
 });
 
