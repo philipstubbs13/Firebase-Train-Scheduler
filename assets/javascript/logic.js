@@ -17,19 +17,19 @@ var config = {
  //Create database variable to create reference to firebase.database().
  var database = firebase.database();
 
- //Create variables
- var trainName ="";
- var destination="";
- var firstTrainTime="";
- var trainFrequency="";
- var nextTrain = "";
- var tMinutesTillTrain = "";
+ // //Create variables
+ // var trainName ="";
+ // var destination="";
+ // var firstTrainTime="";
+ // var trainFrequency="";
+ //var nextTrain="";
+ //var tMinutesTillTrain="";
 
  var tRow = "";
  var getKey = "";
 
 
- //Click event for submit button. When user clicks Submit button to add a train to the schedule...
+ //Click event for the submit button. When user clicks Submit button to add a train to the schedule...
  $("#submit-button").on("click", function() {
 
 	// Prevent form from submitting
@@ -65,13 +65,14 @@ var config = {
 	//Check that the user enters the first train time as military time.
 	else if (firstTrainTime.length !== 5 || firstTrainTime.substring(2,3)!== ":") {
 		$("#missing-field").empty();
-		$("#not-military-time").html("Use military time. For example, 15:00.");
+		$("#not-military-time").html("Time must be in military format: HH:mm. For example, 15:00.");
 		return false;
 	}
 
 	else{
 		$("#not-military-time").empty();
 		$("#missing-field").empty();
+
 		//Moment JS math caclulations to determine train next arrival time and the number of minutes away from destination.
 		// First Time (pushed back 1 year to make sure it comes before current time)
 	    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
@@ -97,37 +98,90 @@ var config = {
 	    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
 	    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-		//Remove the text from the form boxes after user presses the add to schedule button.
-		$("#train-name").val("");
-		$("#destination").val("");
-		$("#first-train-time").val("");
-		$("#frequency").val("");
-
-		//Save the user values in Firebase database.
-		database.ref().push({
+		//Create local temporary object for holding employee data
+		var newTrain = {
 			trainName: trainName,
 			destination: destination,
 			firstTrainTime: firstTrainTime,
 			trainFrequency: trainFrequency,
 			nextTrain: nextTrain,
-			tMinutesTillTrain: tMinutesTillTrain
-		})
+			tMinutesTillTrain: tMinutesTillTrain,
+			currentTime: currentTime.format("hh:mm A")
+		};
+
+		//Save/upload train data to the database.
+		database.ref().push(newTrain);
+
+		//Log everything to console
+		console.log("train name in database: " + newTrain.trainName);
+		console.log("destination in database: " + newTrain.destination);
+		console.log("first train time in database: " + newTrain.firstTrainTime);
+		console.log("train frequency in database: " + newTrain.trainFrequency);
+		console.log("next train in database: " + newTrain.nextTrain);
+		console.log("minutes away in database: " + newTrain.tMinutesTillTrain);
+		console.log("current time in database: " + newTrain.currentTime);
+
+		//Alert to the user that train was added successfully.
+		alert(newTrain.trainName + " successfully added.");
+
+		//Remove the text from the form boxes after user presses the add to schedule button.
+		$("#train-name").val("");
+		$("#destination").val("");
+		$("#first-train-time").val("");
+		$("#frequency").val("");
 	}
 });
 
 
 // At the initial load and subsequent value changes, get a snapshot of the stored data.
 // This function allows you to update the page in real-time when the firebase database changes.
-database.ref().on("child_added", function(snapshot) {
-	console.log(snapshot.val());
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+	console.log(childSnapshot.val());
+	console.log(prevChildKey);
 
 	//Set variables for form input field values equal to the stored values in firebase.
-	trainName = snapshot.val().trainName;
-	destination = snapshot.val().destination;
-	firstTrainTime = snapshot.val().firstTrain;
-	trainFrequency = snapshot.val().trainFrequency;
-	nextTrain = snapshot.val().nextTrain;
-	tMinutesTillTrain = snapshot.val().tMinutesTillTrain;
+	var trainName = childSnapshot.val().trainName;
+	var destination = childSnapshot.val().destination;
+	var firstTrainTime = childSnapshot.val().firstTrainTime;
+	var trainFrequency = childSnapshot.val().trainFrequency;
+	var nextTrain = childSnapshot.val().nextTrain;
+	var tMinutesTillTrain = childSnapshot.val().tMinutesTillTrain;
+	var currentTime = childSnapshot.val().currentTime;
+
+	//Train info
+	console.log(trainName);
+	console.log(destination);
+	console.log(firstTrainTime);
+	console.log(nextTrain);
+	console.log(tMinutesTillTrain);
+	console.log(trainFrequency);
+	console.log(currentTime);
+
+	//Moment JS math caclulations to determine train next arrival time and the number of minutes away from destination.
+	// First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % trainFrequency;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = trainFrequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
 
 	//Update the HTML (schedule table) to reflect the latest stored values in the firebase database.
 	var tRow = $("<tr>");
@@ -172,31 +226,3 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
-
-//OpenWeatherMap API
-//Code for "Current weather" section.
-$( document ).ready(function() {
-    var appID = "beed4816a780902e0944aec50f172e2a";
-
-    $(".query_btn").click(function(){
-        var query_param = $(this).prev().val();
-
-        if ($(this).prev().attr("placeholder") == "City") {
-            var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
-        } else if ($(this).prev().attr("placeholder") == "Zip Code") {
-            var weather = "http://api.openweathermap.org/data/2.5/weather?zip=" + query_param + "&APPID=" + appID;
-        }
-
-        $.getJSON(weather,function(json){
-            $("#city").html("City: " + json.name);
-            $("#main_weather").html("Main weather: " + json.weather[0].main);
-            $("#description_weather").html("Description: " + json.weather[0].description);
-            //$("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
-            //Since the OpenWeatherMap API returns the temperature in kelvin, we need to convert the temperature to fahrenheit first before we display it to the html.
-            var K = json.main.temp;
-      		var F = Math.floor((K - 273.15) * 1.80 + 32);
-      		// Add the temperature content to the HTML
-      		$("#temperature").html("Temperature(F): "  + F);
-        	});
-    })
-});
