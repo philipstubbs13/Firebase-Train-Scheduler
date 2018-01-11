@@ -17,14 +17,22 @@ var config = {
  //Create database variable to create reference to firebase.database().
  var database = firebase.database();
 
+ var tMinutesTillTrain = 0;
+ var nextTrainTd = "";
+ var tMinutesTillTrainTd = "";
+
  //$(".app").hide();
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
-//Show current time
+//Show and update current time. Use setInterval method to update time.
+function displayRealTime() {
 setInterval(function(){
-    $('#current-time').html(moment().format('hh:mm:ss A'))
+    $('#current-time').html(moment().format('hh:mm A'))
   }, 1000);
+}
+displayRealTime();
+
 
 // $(document).on('click', '.signIn', function() {
 // firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -238,6 +246,17 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     //$("#current-time").html("Current time: " + currentTime);
 
 });
+
+ //    function updateMinutes() {
+	// 	setInterval(function(){
+	// 	    tRow.append(nextTrainTd, tMinutesTillTrainTd);
+	// 	  	$("#schedule-body").html(tRow);
+	// 	  }, 1000);
+	// 	};
+	// updateMinutes();
+
+
+
 
 //Click event for trash can icon/button. When user clicks trash can to remove a train from the schedule...
  $("body").on("click", ".trash-can", function(){
