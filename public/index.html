@@ -27,6 +27,9 @@
 
 	<!--Firebase Javascript link-->
 	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+	<!--Add Moment JS-->
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 <body class="bg-secondary">
 
@@ -37,6 +40,7 @@
 					<div class="card-body text-white">
 				    	<h1 class="card-title text-center"><img src="assets/images/if_14_171500.svg" alt="train">myTrain builder</h1>
 				    	<h5 class="card-text"></h5>
+				    	<!-- <button class="text-center btn btn-lg signIn">Sign in with Google.</button> -->
 					</div>
 				</div>
 			</div>
@@ -48,8 +52,9 @@
 					<div class="card-header bg-primary text-white">
 						<h5><img src="assets/images/if_ic_schedule_48px_352085.svg" alt="clock"> Current train schedule</h5>
 					</div>
-					<div class="card-body">
-							<h5 id="current-time"></h5>
+					<div class="card-body app">
+							<!--Display current/running time here using moment Js-->
+							<h5>Current time: <span id="current-time"></span></h5>
 							<table class="table table-hover table-responsive-sm">
 							  <thead>
 							    <tr>
@@ -75,7 +80,7 @@
 					<div class="card-header bg-primary text-white">
 						<h5><img src="assets/images/if_ic_directions_train_48px_352317.svg" alt="train"> Add train</h5>
 					</div>
-					<div class="card-body">
+					<div class="card-body app">
 						<form>
 							<div class="form-group">
 								<!--Hover over the help icon to see tooltip-->
@@ -137,7 +142,5 @@
 <!--Link to my javascript file-->
 <script src="assets/javascript/logic.js"></script>
 
-<!--Add Moment JS-->
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </body>
 </html>

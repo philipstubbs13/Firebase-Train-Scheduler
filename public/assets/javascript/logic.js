@@ -17,6 +17,36 @@ var config = {
  //Create database variable to create reference to firebase.database().
  var database = firebase.database();
 
+ //$(".app").hide();
+
+var provider = new firebase.auth.GoogleAuthProvider();
+
+//Show current time
+setInterval(function(){
+    $('#current-time').html(moment().format('hh:mm:ss A'))
+  }, 1000);
+
+// $(document).on('click', '.signIn', function() {
+// firebase.auth().signInWithPopup(provider).then(function(result) {
+//  // This gives you a Google Access Token.
+//  var token = result.credential.accessToken;
+//  // The signed-in user info.
+//  var user = result.user;
+//  $('.app').show();
+ 
+// });
+// $(this).removeClass('signIn')
+//   .addClass('signOut')
+//   .html('Sign out');
+// });
+
+
+// firebase.auth().signOut().then(function() {
+//   // Sign-out successful.
+// }).catch(function(error) {
+//   // An error happened.
+// });
+
  // //Create variables
  // var trainName ="";
  // var destination="";
@@ -27,7 +57,6 @@ var config = {
 
  var tRow = "";
  var getKey = "";
-
 
  //Click event for the submit button. When user clicks Submit button to add a train to the schedule...
  $("#submit-button").on("click", function() {
@@ -206,7 +235,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
     //Current time
-    $("#current-time").html("Current time: " + currentTime);
+    //$("#current-time").html("Current time: " + currentTime);
 
 });
 
@@ -236,4 +265,6 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+
 
