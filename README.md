@@ -1,8 +1,8 @@
 # myTrainBuilder
 A train schedule application that incorporates Firebase to host arrival and departure data. 
 
-## Overview
-<p></p>
+## About this project
+<p>This project is a train schedule application that incorporates Firebase to host arrival and departure data. The app includes a form where users can enter information about a train, such as name, destination, first train time, and frequency. After a user submits the form, the app retrieves and manipulates this information with Moment.js to calculate the estimated next train time and number of minutes away. Moment.js is also used to display the times in a user friendly format (that is, hh:mm). When a user submits the information for a train, the train informaton is added to the Current schedule table to provide up-to-date information about various trains, such as their arrival times and how many minutes remain until they arrive at their stations. Not only is the train information added to the table, but the data is also pushed to a database that is hosted on Firebase. Source code will be developed over time to handle new features in the future.</p>
 
 ## Live
 <p>App is available live through Firebase:</p>
@@ -10,23 +10,23 @@ A train schedule application that incorporates Firebase to host arrival and depa
 
 ## Structure of the project
 <ul>
-<li> /public/assets/images: This directory contains the icons used in this app.</li>
-<li> /public/assets/javascript: This directory contains the javascript to:
+<li> <b>/public/assets/images</b>: This directory contains the icons used in the app.</li>
+<li> <b>/public/assets/javascript</b>: This directory contains the Javascript to:
 	<ul>
-		<li>Initialize the firebase database.</li>
+		<li>Initialize the Firebase database.</li>
 		<li>Display the time to the user</li>
 		<li>Grab the user input from the text boxes when a user submits the form.</li> 
-		<li>Push the train data to the firebase database when a train is added to the schedule.</li>
+		<li>Push the train data to the Firebase database when a train is added to the schedule.</li>
 		<li>Perform Moment.js math calculations that determine values for train next arrival time and number of minutes away from destination.</li>
-		<li>Update the HTML (<b>Current schedule</b> table) to reflect the latest stored values in the firebase database.</li>
+		<li>Update the HTML (<b>Current schedule</b> table) to reflect the latest stored values in the Firebase database.</li>
 	</ul>
 </li>
 
-<li>/public/assets/css: This directory contains the external stylesheet used for this app.</li>
-<li>/public/index.html: This file contains the code for the HTML and Bootstrap markup.</li>
-<li>firebase.json: This file located in the root directory is the firebase configuration file that gets created when you deploy project to firebase.</li>
-<li>readme_images: This directory contains images used in README file.</li>
-<li>database.rules.json:This file contains the database rules that grant full read and write privileges to users.
+<li><b>/public/assets/css</b>: This directory contains the external stylesheet used for the app.</li>
+<li><b>/public/index.html</b>: This file contains the code for the HTML and Bootstrap markup.</li>
+<li><b>firebase.json</b>: This file located in the root directory is the Firebase configuration file that gets created when you deploy a project to Firebase.</li>
+<li><b>readme_images</b>: This directory contains images used in the README file.</li>
+<li><b>database.rules.json</b>:This file contains the database rules that grant full read and write permissions to users.
 </ul>
 
 ## Screenshots
@@ -49,7 +49,7 @@ A train schedule application that incorporates Firebase to host arrival and depa
 <p>Because Firebase is a Google product, you will need to use your Google account to access and log into Firebase. If you don't have a Google account, you will need to create one.</p>
 
 
-## How to use the site
+## How to use the app
 
 ### Entering or calulating train information
 To build the train schedule, you will need to provide information about the train, such as train name, destination, first train time, and frequency. This information is used to calculate the train next arrival time and number of minutes away using the moment.js library. 
@@ -73,14 +73,15 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 ## Form input validation
 <p>The app uses form input validation for the <b>Add train</b> form to check or validate the following:</p>
 	<li>The user has entered a value for every field (that is, all fields are required.). This ensures that there are no empty or null values when the form is submitted.
-		If the user tries to add a train when there is an empty or null value, a red error message will appear that says "ALL fields are required to add a train to the schedule.
+		If the user tries to add a train when there is an empty or null value, a red error message will appear that says "ALL fields are required to add a train to the schedule."
 	</li>
-	<li>The user has entered the First train time in military time(HH:mm). If the user doesn't enter the time in the correct format (for example, 9:00), red text will appear next to this field telling the user that the time needs to be in military time format.</li>
+	<li>The user has entered the First train time in military time (HH:mm). If the user doesn't enter the time in the correct format (for example, 9:00), red text will appear next to this field telling the user that the time needs to be in military time format.</li>
 	<li>The user has entered a number for Frequency. If the user doesn't enter a number, red text will appear next to this field telling the user to enter a number.</li>
 
 
 ## Future feature enhancements
 <ul>
+	<li>When user adds a train to the schedule successfully, a success alert is displayed. Replace alert with modal.</li>
 	<li>Make it so that only users who log into the site with their Google or GitHub accounts can use the site. Read up on Firebase authentication for this.</li>
 	<li>Try adding update and remove buttons for each train. Let the user edit the row's elements -- allow them to change a train's name, destination, and arrival time (and then, by relation, minutes to arrival).</li>
 	<li>Consider updating "minutes to arrival" and "next train time" text once every minute. This is significantly more challenging; only attempt this if completed the actual activity and committed it somewhere on GitHub for safekeeping (and maybe create a second GitHub repo).</li>
