@@ -9,18 +9,25 @@ A train schedule application that incorporates Firebase to host arrival and depa
 <p>https://fir-train-scheduler-7f4a9.firebaseapp.com/</p>
 
 ## Structure of the project
-<li> /public/assets/images contains the icons used in this app.</li>
-<li> /public/assets/javascript contains the javascript to:
-	<li>Initialize the firebase database.</li>
-	<li>Display the time to the user</li>
-	<li>Grab the user input from the text boxes when a user submits the form.</li> 
-	<li>Push the train data to the firebase database when a train is added to the schedule.</li>
-	<li>Perform Moment.js math calculations that determine values for train next arrival time and number of minutes away from destination.</li>
-	<li>Update the HTML (<b>Current schedule</b> table) to reflect the latest stored values in the firebase database.</li>
+<ul>
+<li> /public/assets/images: This directory contains the icons used in this app.</li>
+<li> /public/assets/javascript: This directory contains the javascript to:
+	<ul>
+		<li>Initialize the firebase database.</li>
+		<li>Display the time to the user</li>
+		<li>Grab the user input from the text boxes when a user submits the form.</li> 
+		<li>Push the train data to the firebase database when a train is added to the schedule.</li>
+		<li>Perform Moment.js math calculations that determine values for train next arrival time and number of minutes away from destination.</li>
+		<li>Update the HTML (<b>Current schedule</b> table) to reflect the latest stored values in the firebase database.</li>
+	</ul>
 </li>
 
-<li>/public/assets/css contains the external stylesheet used for this app.</li>
-<li>/public/index.html contains the code for the HTML and Bootstrap markup.</li>
+<li>/public/assets/css: This directory contains the external stylesheet used for this app.</li>
+<li>/public/index.html: This file contains the code for the HTML and Bootstrap markup.</li>
+<li>firebase.json: This file located in the root directory is the firebase configuration file that gets created when you deploy project to firebase.</li>
+<li>readme_images: This directory contains images used in README file.</li>
+<li>database.rules.json:This file contains the database rules that grant full read and write privileges to users.
+</ul>
 
 ## Screenshots
 ![Image of site header](readme_images/site_header2.png)
