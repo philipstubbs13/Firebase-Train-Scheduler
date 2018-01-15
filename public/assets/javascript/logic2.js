@@ -14,26 +14,15 @@ var config = {
  var database = firebase.database();
 
  var tMinutesTillTrain = 0;
- var nextTrainTd = "";
- var tMinutesTillTrainTd = ""
-
-var provider = new firebase.auth.GoogleAuthProvider();
 
 //Show and update current time. Use setInterval method to update time.
 function displayRealTime() {
 setInterval(function(){
-   $('#current-time').html(moment().format('hh:mm:ss A'))
+    $('#current-time').html(moment().format('hh:mm A'))
   }, 1000);
 }
 displayRealTime();
 
- //Create variables
- // var trainName ="";
- // var destination="";
- // var firstTrainTime="";
- // var trainFrequency;
- // var nextTrain="";
- // var tMinutesTillTrain;
 
  var tRow = "";
  var getKey = "";
@@ -80,7 +69,6 @@ displayRealTime();
 		return false;
 	}
 
-	//Check if trainFrequency value that user entered is not a number.
 	else if (isNaN(trainFrequency)) {
     	$("#missing-field").empty();
     	$("#not-military-time").empty();
@@ -88,7 +76,6 @@ displayRealTime();
     	return false;
 	}
 
-	//if and only if user enters info in all fields and all fields have valid inputs, let's proceed...
 	else {
 		$("#not-military-time").empty();
 		$("#missing-field").empty();
@@ -98,7 +85,7 @@ displayRealTime();
 	    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
 	    console.log(firstTimeConverted);
 
-	   	// Current Time
+	    // Current Time
 	    var currentTime = moment();
 	    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
@@ -127,7 +114,6 @@ displayRealTime();
 			nextTrain: nextTrain,
 			tMinutesTillTrain: tMinutesTillTrain,
 			currentTime: currentTime.format("hh:mm A")
-			//dateAdded: firebase.database.ServerValue.TIMESTAMP
 		};
 
 		//Save/upload train data to the database.
@@ -140,8 +126,7 @@ displayRealTime();
 		console.log("train frequency in database: " + newTrain.trainFrequency);
 		console.log("next train in database: " + newTrain.nextTrain);
 		console.log("minutes away in database: " + newTrain.tMinutesTillTrain);
-		console.log("current time in database: " + newTrain.fbTime);
-		console.log("Date added: " + newTrain.dateAdded);
+		console.log("current time in database: " + newTrain.currentTime);
 
 		//Alert to the user that train was added successfully.
 		alert(newTrain.trainName + " successfully added.");
@@ -204,12 +189,28 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
+
+	//Update the HTML (schedule table) to reflect the latest stored values in the firebase database.
+	var tRow = $("<tr>");
+	var trainTd = $("<td>").text(trainName);
+    var destTd = $("<td>").text(destination);
+    var nextTrainTd = $("<td>").text(nextTrain);
+    var trainFrequencyTd = $("<td>").text(trainFrequency);
+    var tMinutesTillTrainTd = $("<td>").text(tMinutesTillTrain);
+
     // Append the newly created table data to the table row.
-	  $("#schedule-body").append("<tr> <td id='remove'><img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'></td> + <td id='name'> " + trainName +
-	    " </td><td id='destination'> " + destination +
-	    " </td><td id='trainFrequency'> " + trainFrequency +
-	    " </td><td id='nextTrain'> " + nextTrain + 
-	    " </td><td id='tMinutesTillTrain'> " + tMinutesTillTrain +" </td></tr>");
+    //Append trash can icon to each row so that user can delete row if needed.
+    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", "<i class='fa fa-pencil' aria-hidden='true'></i>", trainTd, destTd, trainFrequencyTd, nextTrainTd, tMinutesTillTrainTd);
+    // Append the table row to the table body
+    $("#schedule-body").append(tRow);
+
+ 	// Append the newly created table data to the table row.
+	// $("#schedule-body").append("<tr> <td id='remove'><img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'></td> + <td id='name'> " + trainName +
+	// " </td><td id='destination'> " + destination +
+	// " </td><td id='trainFrequency'> " + trainFrequency +
+	// " </td><td id='nextTrain'> " + nextTrain + 
+	// " </td><td id='tMinutesTillTrain'> " + tMinutesTillTrain +" </td></tr>");
+
 });
 
 
@@ -239,6 +240,3 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-
-
-
