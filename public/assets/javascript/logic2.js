@@ -200,7 +200,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
     // Append the newly created table data to the table row.
     //Append trash can icon to each row so that user can delete row if needed.
-    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", "<i class='fa fa-pencil' aria-hidden='true'></i>", trainTd, destTd, trainFrequencyTd, nextTrainTd, tMinutesTillTrainTd);
+    tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", trainTd, destTd, trainFrequencyTd, nextTrainTd, tMinutesTillTrainTd);
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
 
