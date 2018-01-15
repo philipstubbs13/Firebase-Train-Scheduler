@@ -1,14 +1,29 @@
 # myTrainBuilder
 A train schedule application that incorporates Firebase to host arrival and departure data. 
 
-## About this project
+## Table of contents
+  * [About this project](#about-this-project)
+  * [Live](#live)
+  * [Structure of the project](#structure-of-project)
+  * [Screenshots](#screenshots)
+  * [Technologies used to create app](#technologies-used)
+  * [How to use the Firebase API](#firebase-api)
+  * [How to use the app](#how-to-use-app)
+  	* [Entering or calculating train information](#train-info)
+  	* [Adding a train to the schedule](#add-train)
+  * [Form input validation](#form-validation)
+  * [Future feature enhancements](#feature-enhancements)
+  * [Icons](#icons)
+  * [Feedback](#feedback)
+
+## <a name="about-this-project"></a> About this project
 <p>This project is a train schedule application that incorporates Firebase to host arrival and departure data. The app includes a form where users can enter information about a train, such as name, destination, first train time, and frequency. After a user submits the form, the app retrieves and manipulates this information with Moment.js to calculate the estimated next train time and number of minutes away. Moment.js is also used to display the times in a user friendly format (that is, hh:mm). When a user submits the information for a train, the train informaton is added to the Current schedule table to provide up-to-date information about various trains, such as their arrival times and how many minutes remain until they arrive at their stations. Not only is the train information added to the table, but the data is also pushed to a database that is hosted on Firebase. Source code will be developed over time to handle new features in the future.</p>
 
-## Live
+## <a name="live"></a> Live
 <p>App is available live through Firebase:</p>
 <p>https://fir-train-scheduler-7f4a9.firebaseapp.com/</p>
 
-## Structure of the project
+## <a name="structure-of-project"></a> Structure of the project
 <ul>
 <li> <b>/public/assets/images</b>: This directory contains the icons used in the app.</li>
 <li> <b>/public/assets/javascript</b>: This directory contains the Javascript to:
@@ -29,13 +44,13 @@ A train schedule application that incorporates Firebase to host arrival and depa
 <li><b>database.rules.json</b>:This file contains the database rules that grant full read and write permissions to users.
 </ul>
 
-## Screenshots
+## <a name="screenshots"></a> Screenshots
 ![Image of site header](readme_images/site_header2.png)
 ![Image of current trains schedule](readme_images/current_train_schedule2.png)
 ![Image of add train form](readme_images/add_train_section2.png)
 
 
-## Technologies used to create site
+## <a name="technologies-used"></a> Technologies used to create app
 <li>HTML5</li>
 <li>CSS</li>
 <li>Bootstrap 4.0.0-beta (http://getbootstrap.com/)</li>
@@ -44,14 +59,14 @@ A train schedule application that incorporates Firebase to host arrival and depa
 <li>Firebase API for database hosting (https://firebase.google.com/)</li>
 <li>Moment.js (http://momentjs.com/)</li>
 
-## How to use the Firebase API
+## <a name="firebase-api"></a> How to use the Firebase API
 <p>To learn about the Firebase API and how to add Firebase to your web app, read the <a href="https://firebase.google.com/docs/web/setup" target="_blank">Firebase documentation</a>.</p>
 <p>Because Firebase is a Google product, you will need to use your Google account to access and log into Firebase. If you don't have a Google account, you will need to create one.</p>
 
 
-## How to use the app
+## <a name="how-to-use-app"></a> How to use the app
 
-### Entering or calulating train information
+### <a name="train-info"></a> Entering or calulating train information
 To build the train schedule, you will need to provide information about the train, such as train name, destination, first train time, and frequency. This information is used to calculate the train next arrival time and number of minutes away using the moment.js library. 
 
 Train info | Description
@@ -63,14 +78,14 @@ Frequency (min) | How often (in minutes) the train leaves.
 Next arrival | The next time the train will arrive at the destination. This value is calculated using the number of minutes away value and is converted to a hh:mm time format using moment.js.
 Minutes away | The number of minutes until the next train is expected to arrive at the destination. This value is calculated using the Frequency value the user enters in the form.
 
-### Adding a train to the schedule
+### <a name="add-train"></a> Adding a train to the schedule
 <p>To add a train to the schedule, use the <b>Add train</b> form to enter information about the train being added. All fields are required to add a train to the schedule.
 
 <!-- ### Removing a train from the schedule
 
 ### Updating the train schedule -->
 
-## Form input validation
+## <a name="form-validation"></a> Form input validation
 <p>The app uses form input validation for the <b>Add train</b> form to check or validate the following:</p>
 	<li>The user has entered a value for every field (that is, all fields are required.). This ensures that there are no empty or null values when the form is submitted.
 		If the user tries to add a train when there is an empty or null value, a red error message will appear that says "ALL fields are required to add a train to the schedule."
@@ -79,7 +94,7 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 	<li>The user has entered a number for Frequency. If the user doesn't enter a number, red text will appear next to this field telling the user to enter a number.</li>
 
 
-## Future feature enhancements
+## <a name="feature-enhancements"></a> Future feature enhancements
 <ul>
 	<li>When user adds a train to the schedule successfully, a success alert is displayed. Replace alert with modal.</li>
 	<li>Make it so that only users who log into the site with their Google or GitHub accounts can use the site. Read up on Firebase authentication for this.</li>
@@ -87,9 +102,9 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 	<li>Consider updating "minutes to arrival" and "next train time" text once every minute. This is significantly more challenging; only attempt this if completed the actual activity and committed it somewhere on GitHub for safekeeping (and maybe create a second GitHub repo).</li>
 </ul>
 
-## Icons
+## <a name="icons"></a> Icons
 All icons used for this project can be obtained from <a href="http://fontawesome.io/icons/" target="_blank">Font Awesome</a> or <a href="https://www.iconfinder.com/" target="_blank">Iconfinder</a>.
 
-## Feedback
+## <a name="feedback"></a> Feedback
 <p>Feel free to send feedback via <a href="https://twitter.com/iamPhilStubbs" target="_blank">Twitter</a>, email (philipstubbs13@gmail.com), or <a href="https://github.com/philipstubbs13/Firebase-Train-Scheduler/issues/" target="_blank">file an issue</a>. Feature requests are always welcome. If you wish to contribute, please send an email with your request to philipstubbs13@gmail.com to discuss.</p>
 
