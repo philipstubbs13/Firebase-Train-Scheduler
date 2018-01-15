@@ -60,8 +60,8 @@ Train name | The name of the train. For example, New Haven Railroad.
 Destination | The location to where the train is traveling to. For example, Chicago, IL.
 First train time (HH:mm - military time) | The first time that the train leaves (in military time).
 Frequency (min) | How often (in minutes) the train leaves.
-Next arrival | The next time the train will arrive at the destination.
-Minutes away | The number of minutes until the next train is expected to arrive at the destination.
+Next arrival | The next time the train will arrive at the destination. This value is calculated using the number of minutes away value and is converted to a hh:mm time format using moment.js.
+Minutes away | The number of minutes until the next train is expected to arrive at the destination. This value is calculated using the Frequency value the user enters in the form.
 
 ### Adding a train to the schedule
 <p>To add a train to the schedule, use the <b>Add train</b> form to enter information about the train being added. All fields are required to add a train to the schedule.
@@ -69,6 +69,14 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 <!-- ### Removing a train from the schedule
 
 ### Updating the train schedule -->
+
+## Form input validation
+<p>The app uses form input validation for the <b>Add train</b> form to check or validate the following:</p>
+	<li><p>The user has entered a value for every field (that is, all fields are required.). This ensures that there are no empty or null values when the form is submitted.</p>
+		<p>If the user tries to add a train when there is an empty or null value, a red error message will appear that says "ALL fields are required to add a train to the schedule.</p>
+	</li>
+	<li>The user has entered the First train time in military time(HH:mm). If the user doesn't enter the time in the correct format (for example, 9:00), red text will appear next to this field telling the user that the time needs to be in military time format.</li>
+	<li>The user has entered a number for Frequency. If the user doesn't enter a number, red text will appear next to this field telling the user to enter a number.</li>
 
 
 ## Future feature enhancements
