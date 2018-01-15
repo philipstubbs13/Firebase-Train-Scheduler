@@ -9,9 +9,12 @@ A train schedule application that incorporates Firebase to host arrival and depa
 <p>https://fir-train-scheduler-7f4a9.firebaseapp.com/</p>
 
 ## Screenshots
-<img src="assets/images/site_header.png" alt="Train schedule builder">
-<img src="assets/images/current_train_schedule.png" alt="Current train schedule">
-<img src="assets/images/add_train_section.png" alt="Add train section of site">
+![Image of site header](assets/images/site_header2.png)
+![Image of current trains schedule](assets/images/current_train_schedule2.png)
+![Image of add train form](assets/images/add_train_section2.png)
+<!-- <img src="assets/images/site_header2.png" alt="Train schedule builder">
+<img src="assets/images/current_train_schedule2.png" alt="Current train schedule">
+<img src="assets/images/add_train_section2.png" alt="Add train section of site"> -->
 
 
 ## Technologies used to create site
