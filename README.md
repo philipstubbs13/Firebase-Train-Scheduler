@@ -13,6 +13,7 @@ A train schedule application that incorporates Firebase to host arrival and depa
   	* [Adding a train to the schedule](#add-train)
   * [Form input validation](#form-validation)
   * [Future feature enhancements](#feature-enhancements)
+  * [Known issues](#known-issues)
   * [Icons](#icons)
   * [Feedback](#feedback)
 
@@ -105,6 +106,14 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 	<li>Try adding update and remove buttons for each train. Let the user edit the row's elements -- allow them to change a train's name, destination, and arrival time (and then, by relation, minutes to arrival).</li>
 	<li>Consider updating "minutes to arrival" and "next train time" text once every minute. This is significantly more challenging; only attempt this if completed the actual activity and committed it somewhere on GitHub for safekeeping (and maybe create a second GitHub repo).</li>
 </ul>
+
+## <a name ="known-issues"></a> Known issues
+<p>The following are known issues to be addressed in a future code update/when I have extra time.</p>
+<ul>
+	<li>When deleting a train, the app currently only deletes the train from the web page. The train is not deleted from the database.</li>
+	<li>The current time displayed at the top of the table is updating live. However, the next arrival and minutes away values in the table do not update live and only update on refresh of web page.</li>
+</ul>
+
 
 ## <a name="icons"></a> Icons
 All icons used for this project can be obtained from <a href="http://fontawesome.io/icons/" target="_blank">Font Awesome</a> or <a href="https://www.iconfinder.com/" target="_blank">Iconfinder</a>.
