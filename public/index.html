@@ -30,6 +30,12 @@
 
 	<!--Add Moment JS-->
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+	<!--Bootstrap Javascript links (required for modals to work)-->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
 </head>
 <body class="bg-secondary">
 
@@ -105,8 +111,47 @@
 						    	<input type="text" class="form-control" id="frequency" placeholder="">
 						  	</div>
 						  	<p id="missing-field" class="form-validation"></p>
-						  	<button type="submit" class="btn btn-primary rounded" id="submit-button">Add to schedule</button>
+						  	<button type="submit" class="btn btn-primary rounded" id="submit-button" data-toggle="modal">Add to schedule</button>
+
+						  	<!--Confirmation modal. Appears when train is successfully added to the current schedule.-->
+						  	<div class="modal" id="addTrain" tabindex="-1" role="dialog">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header bg-primary">
+							        <h5 class="modal-title text-white">Train successfully added</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							        	<span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="add-train-modal ml-3 mt-3">
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 						</form>
+
+						<!--Confirmation modal. Appears when user wants to remove a train from the schedule-->
+					  	<div class="modal" id="removeTrain" tabindex="-1" role="dialog">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header bg-primary">
+						        <h5 class="modal-title text-white">Are you sure you want to remove this train?</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						        	<span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="remove-train-modal ml-3 mt-3">
+						      </div>
+						      <div class="modal-footer">
+						      	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="remove-train-btn">Remove</button>
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 		
 					</div>
 				</div>

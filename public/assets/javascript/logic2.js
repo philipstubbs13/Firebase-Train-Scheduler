@@ -128,8 +128,9 @@ displayRealTime();
 		console.log("minutes away in database: " + newTrain.tMinutesTillTrain);
 		console.log("current time in database: " + newTrain.currentTime);
 
-		//Alert to the user that train was added successfully.
-		alert(newTrain.trainName + " successfully added.");
+		//Confirmation modal that appears when user submits form and train is added successfully to the schedule.
+		$(".add-train-modal").html("<p>" + newTrain.trainName + " was successfully added to the current schedule.");
+		$('#addTrain').modal();
 
 		//Remove the text from the form boxes after user presses the add to schedule button.
 		$("#train-name").val("");
@@ -221,6 +222,9 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 	//confirm with the user before he or she decides to actually delete the train data.
 	var confirmDelete = confirm("Deleting a train permanently removes the train from the system. Are you sure you want to delete this train?");
+	//Confirmation modal that appears when user wants to remove train from schedule.
+		//$(".remove-train-modal").html("<p>" + " Deleting a train permanently removes the train from the system. Are you sure you want to delete this train?" + "</p>");
+		//$('#removeTrain').modal();
 	//If user confirms...
 	if (confirmDelete) {
 		//Remove the closest table row.
