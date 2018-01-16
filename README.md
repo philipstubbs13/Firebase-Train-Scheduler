@@ -91,8 +91,11 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 		If the user tries to add a train when there is an empty or null value, a red error message will appear that says "ALL fields are required to add a train to the schedule."
 		<img src="readme_images/form_validation_example1.png">
 	</li>
-	<li>The user has entered the First train time in military time (HH:mm). If the user doesn't enter the time in the correct format (for example, 9:00), red text will appear next to this field telling the user that the time needs to be in military time format.</li>
+	<li>The user has entered the First train time in military time (HH:mm). If the user doesn't enter the time in the correct format (for example, 9:00), red text will appear next to this field telling the user that the time needs to be in military time format.
+	<img src="readme_images/form_validation_example2.png">
+	</li>
 	<li>The user has entered a number for Frequency. If the user doesn't enter a number, red text will appear next to this field telling the user to enter a number.</li>
+	<img src="readme_images/form_validation_example3.png">
 
 
 ## <a name="feature-enhancements"></a> Future feature enhancements
