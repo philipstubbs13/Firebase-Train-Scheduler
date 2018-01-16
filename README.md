@@ -89,7 +89,7 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 <p>The app uses form input validation for the <b>Add train</b> form to check or validate the following:</p>
 	<li>The user has entered a value for every field (that is, all fields are required.). This ensures that there are no empty or null values when the form is submitted.
 		If the user tries to add a train when there is an empty or null value, a red error message will appear that says "ALL fields are required to add a train to the schedule."
-		![Image of form validation example 1](assets/images/form_validation_example1.png)
+		<img src="readme_images/form_validation_example1.png">
 	</li>
 	<li>The user has entered the First train time in military time (HH:mm). If the user doesn't enter the time in the correct format (for example, 9:00), red text will appear next to this field telling the user that the time needs to be in military time format.</li>
 	<li>The user has entered a number for Frequency. If the user doesn't enter a number, red text will appear next to this field telling the user to enter a number.</li>
