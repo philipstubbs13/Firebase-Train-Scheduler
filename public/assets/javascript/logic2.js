@@ -15,6 +15,37 @@ var config = {
 
  var tMinutesTillTrain = 0;
 
+$(".content").hide();
+
+//Create an instance of the google provider object.
+ var provider = new firebase.auth.GoogleAuthProvider();
+
+$(document).on('click', '.signIn', function() {
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+     // This gives you a Google Access Token.
+     var token = result.credential.accessToken;
+     // The signed-in user info.
+     var user = result.user;
+     $('.content').show();
+     loggedIn();
+     
+    });
+    $(this).removeClass('signIn')
+      .addClass('signOut')
+      .html('Sign Out Of Google');
+  });
+
+$(document).on('click', '.signOut', function () {
+    firebase.auth().signOut().then(function() {
+      $('.content').hide();
+    }, function(error) {
+      // An error happened.
+    });
+    $(this).removeClass('signOut')
+      .addClass('signIn')
+      .html('Sign in With Google');
+  });
+
 //Show and update current time. Use setInterval method to update time.
 function displayRealTime() {
 setInterval(function(){
@@ -244,3 +275,4 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+}

@@ -30,11 +30,11 @@ A train schedule application that incorporates Firebase to host arrival and depa
 <li> <b>/public/assets/javascript</b>: This directory contains the Javascript to:
 	<ul>
 		<li>Initialize the Firebase database.</li>
-		<li>Display the time to the user</li>
+		<li>Display the time to the user.</li>
 		<li>Grab the user input from the text boxes when a user submits the form.</li> 
 		<li>Push the train data to the Firebase database when a train is added to the schedule.</li>
 		<li>Perform Moment.js math calculations that determine values for train next arrival time and number of minutes away from destination.</li>
-		<li>Update the HTML (<b>Current schedule</b> table) to reflect the latest stored values in the Firebase database.</li>
+		<li>Update the HTML (<b>Current train schedule</b> table) to reflect the latest stored values in the Firebase database.</li>
 	</ul>
 </li>
 
@@ -68,7 +68,7 @@ A train schedule application that incorporates Firebase to host arrival and depa
 ## <a name="how-to-use-app"></a> How to use the app
 
 ### <a name="train-info"></a> Entering or calulating train information
-To build the train schedule, you will need to provide information about the train, such as train name, destination, first train time, and frequency. This information is used to calculate the train next arrival time and number of minutes away using the moment.js library. 
+To build the train schedule, you will need to provide information about the train, such as train name, destination, first train time, and frequency. This information is used to calculate the train next arrival time and number of minutes away using the Moment.js library. 
 
 Train info | Description
 ------------ | -------------
@@ -76,8 +76,8 @@ Train name | The name of the train. For example, New Haven Railroad.
 Destination | The location to where the train is traveling to. For example, Chicago, IL.
 First train time (HH:mm - military time) | The first time that the train leaves (in military time).
 Frequency (min) | How often (in minutes) the train leaves.
-Next arrival | The next time the train will arrive at the destination. This value is calculated using the number of minutes away value and is converted to a hh:mm time format using moment.js.
-Minutes away | The number of minutes until the next train is expected to arrive at the destination. This value is calculated using the Frequency value the user enters in the form.
+Next arrival | The next time the train will arrive at the destination. This value is calculated using the <b>Minutes away</b> value and is converted to a hh:mm time format using Moment.js.
+Minutes away | The number of minutes until the next train is expected to arrive at the destination. This value is calculated using the <b>Frequency (min)</b> value the user enters in the form.
 
 ### <a name="add-train"></a> Adding a train to the schedule
 <p>To add a train to the schedule, use the <b>Add train</b> form to enter information about the train being added. All fields are required to add a train to the schedule.
@@ -101,7 +101,7 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 
 ## <a name="feature-enhancements"></a> Future feature enhancements
 <ul>
-	<li>When user adds a train to the schedule successfully, a success alert is displayed. Replace alert with modal.</li>
+	<li>When user tries to remove a train from the schedule, an alert is displayed. Replace alert with modal.</li>
 	<li>Make it so that only users who log into the site with their Google or GitHub accounts can use the site. Read up on Firebase authentication for this.</li>
 	<li>Try adding update and remove buttons for each train. Let the user edit the row's elements -- allow them to change a train's name, destination, and arrival time (and then, by relation, minutes to arrival).</li>
 	<li>Consider updating "minutes to arrival" and "next train time" text once every minute. This is significantly more challenging; only attempt this if completed the actual activity and committed it somewhere on GitHub for safekeeping (and maybe create a second GitHub repo).</li>
