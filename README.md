@@ -141,10 +141,9 @@ All icons used for this project can be obtained from <a href="http://fontawesome
 	<li>Run the following command to create and checkout a branch for where you will make your code updates:</li>
 		<pre>git checkout -b branch_name </pre>
 	<li>Make your changes, commit the code, and then push/upload the changes to only your branch.</li>
-		<pre>git add .
-			git commit -m "my code changes"
-			git push origin name_of_branch
-		</pre>
+		<pre>git add .</pre>
+		<pre>git commit -m "my code changes"</pre>
+		<pre>git push origin name_of_branch</pre>
 	<li>Navigate to the repository on GitHub and submit a pull request for review and approval to add your changes to code base.</li>
 </ol>
 
