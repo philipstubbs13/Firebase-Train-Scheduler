@@ -81,6 +81,7 @@ displayRealTime();
 	else {
 		$("#not-military-time").empty();
 		$("#missing-field").empty();
+		$("#not-a-number").empty();
 
 		//Moment JS math caclulations to determine train next arrival time and the number of minutes away from destination.
 		// First Time (pushed back 1 year to make sure it comes before current time)

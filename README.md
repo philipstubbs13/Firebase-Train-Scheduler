@@ -123,23 +123,27 @@ All icons used for this project can be obtained from <a href="http://fontawesome
 <p>Feel free to send feedback via <a href="https://twitter.com/iamPhilStubbs" target="_blank">Twitter</a>, email (philipstubbs13@gmail.com), or <a href="https://github.com/philipstubbs13/Firebase-Train-Scheduler/issues/" target="_blank">file an issue</a>. Feature requests are always welcome.</p>
 
 ## <a name="contribute"></a> How to contribute to this project.
+<p>Contributions to this project are greatly appreciated and will be recognized.</p>
+<p>If you have an idea to implement, a feature to add, or an issue to fix, follow these steps:</p>
 <ol>
 	<li>Send an email with your request to philipstubbs13@gmail.com to discuss.</li>
-	<li>Clone this repository to your local directory if it hasn’t been cloned already.</li>
+	<li>Clone this repository to your local directory if it hasn’t been cloned already.
+		<pre>https://github.com/philipstubbs13/Firebase-Train-Scheduler.git</pre>
+	</li>
 	<li>Navigate to the folder where you cloned the repository.
 		<img src="readme_images/contribute1.png" alt="git bash command line">
 	</li>
 	<li>Run the following commands to ensure that you have the latest and greatest code.</li>
 		<ul>
-			<li>git checkout master</li>
-			<li>git pull
+			<li><pre>git checkout master</pre></li>
+			<li><pre>git pull</pre>
 			<img src="readme_images/contribute2.png" alt="git commands">
 			</li>
 		</ul>
 	</li>
 	<li>Run the following command to create and checkout a branch for where you will make your code updates:</li>
 		<ul>
-			<li>git checkout -b branch_name </li>
+			<li><pre>git checkout -b branch_name </pre></li>
 		</ul>
 	<li>Make your changes, commit the code, and then push/upload the changes to only your branch.</li>
 	<li>Navigate to the repository on GitHub and submit a pull request for review and approval to add your changes to code base.</li>
