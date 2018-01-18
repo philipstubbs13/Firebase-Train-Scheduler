@@ -239,4 +239,4 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-}
+
