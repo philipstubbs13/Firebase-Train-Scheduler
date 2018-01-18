@@ -16,6 +16,7 @@ A train schedule application that incorporates Firebase to host arrival and depa
   * [Known issues](#known-issues)
   * [Icons](#icons)
   * [Feedback](#feedback)
+  * [How to contribute to this project](#contribute)
 
 ## <a name="about-this-project"></a> About this project
 <p>This project is a train schedule application that incorporates Firebase to host arrival and departure data. The app includes a form where users can enter information about a train, such as name, destination, first train time, and frequency. After a user submits the form, the app retrieves and manipulates this information with Moment.js to calculate the estimated next train time and number of minutes away. Moment.js is also used to display the times in a user friendly format (that is, hh:mm). When a user submits the information for a train, the train informaton is added to the Current schedule table to provide up-to-date information about various trains, such as their arrival times and how many minutes remain until they arrive at their stations. Not only is the train information added to the table, but the data is also pushed to a database that is hosted on Firebase. Source code will be developed over time to handle new features in the future.</p>
@@ -119,5 +120,30 @@ Minutes away | The number of minutes until the next train is expected to arrive 
 All icons used for this project can be obtained from <a href="http://fontawesome.io/icons/" target="_blank">Font Awesome</a> or <a href="https://www.iconfinder.com/" target="_blank">Iconfinder</a>.
 
 ## <a name="feedback"></a> Feedback
-<p>Feel free to send feedback via <a href="https://twitter.com/iamPhilStubbs" target="_blank">Twitter</a>, email (philipstubbs13@gmail.com), or <a href="https://github.com/philipstubbs13/Firebase-Train-Scheduler/issues/" target="_blank">file an issue</a>. Feature requests are always welcome. If you wish to contribute, please send an email with your request to philipstubbs13@gmail.com to discuss.</p>
+<p>Feel free to send feedback via <a href="https://twitter.com/iamPhilStubbs" target="_blank">Twitter</a>, email (philipstubbs13@gmail.com), or <a href="https://github.com/philipstubbs13/Firebase-Train-Scheduler/issues/" target="_blank">file an issue</a>. Feature requests are always welcome.</p>
+
+## <a name="contribute"></a> How to contribute to this project.
+<ol>
+	<li>Send an email with your request to philipstubbs13@gmail.com to discuss.</li>
+	<li>Clone this repository to your local directory if it hasn’t been cloned already.</li>
+	<li>Navigate to the folder where you cloned the repository.
+		<img src="readme_images/contribute1.png" alt="git bash command line">
+	</li>
+	<li>Run the following commands to ensure that you have the latest and greatest code.</li>
+		<ul>
+			<li>git checkout master</li>
+			<li>git pull
+			<img src="readme_images/contribute2.png" alt="git commands">
+			</li>
+		</ul>
+	</li>
+	<li>Run the following command to create and checkout a branch for where you will make your code updates:
+		git checkout -b branch_name </li>
+	<li>Make your changes, commit the code, and push/upload the changes to only your branch.</li>
+	<li>Navigate to the repository on GitHub and submit a pull request for review and approval to add changes to code base.</li>
+</ol>
+
+
+
+
 
