@@ -137,10 +137,12 @@ All icons used for this project can be obtained from <a href="http://fontawesome
 			</li>
 		</ul>
 	</li>
-	<li>Run the following command to create and checkout a branch for where you will make your code updates:
-		git checkout -b branch_name </li>
-	<li>Make your changes, commit the code, and push/upload the changes to only your branch.</li>
-	<li>Navigate to the repository on GitHub and submit a pull request for review and approval to add changes to code base.</li>
+	<li>Run the following command to create and checkout a branch for where you will make your code updates:</li>
+		<ul>
+			<li>git checkout -b branch_name </li>
+		</ul>
+	<li>Make your changes, commit the code, and then push/upload the changes to only your branch.</li>
+	<li>Navigate to the repository on GitHub and submit a pull request for review and approval to add your changes to code base.</li>
 </ol>
 
 
