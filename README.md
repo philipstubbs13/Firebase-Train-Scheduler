@@ -127,25 +127,24 @@ All icons used for this project can be obtained from <a href="http://fontawesome
 <p>If you have an idea to implement, a feature to add, or an issue to fix, follow these steps:</p>
 <ol>
 	<li>Send an email with your request to philipstubbs13@gmail.com to discuss.</li>
-	<li>Clone this repository to your local directory if it hasn’t been cloned already.
-		<pre>https://github.com/philipstubbs13/Firebase-Train-Scheduler.git</pre>
+	<li>Run the following command to clone this repository to your local directory if it hasn’t been cloned already:
+		<pre>git clone https://github.com/philipstubbs13/Firebase-Train-Scheduler.git</pre>
 	</li>
 	<li>Navigate to the folder where you cloned the repository.
 		<img src="readme_images/contribute1.png" alt="git bash command line">
 	</li>
 	<li>Run the following commands to ensure that you have the latest and greatest code.</li>
-		<ul>
-			<li><pre>git checkout master</pre></li>
-			<li><pre>git pull</pre>
-			<img src="readme_images/contribute2.png" alt="git commands">
-			</li>
-		</ul>
+		<pre>git checkout master</pre>
+		<pre>git pull</pre>
+		<img src="readme_images/contribute2.png" alt="git commands">
 	</li>
 	<li>Run the following command to create and checkout a branch for where you will make your code updates:</li>
-		<ul>
-			<li><pre>git checkout -b branch_name </pre></li>
-		</ul>
+		<pre>git checkout -b branch_name </pre>
 	<li>Make your changes, commit the code, and then push/upload the changes to only your branch.</li>
+		<pre>git add .
+			git commit -m "my code changes"
+			git push origin name_of_branch
+		</pre>
 	<li>Navigate to the repository on GitHub and submit a pull request for review and approval to add your changes to code base.</li>
 </ol>
 
