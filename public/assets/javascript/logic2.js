@@ -15,37 +15,6 @@ var config = {
 
  var tMinutesTillTrain = 0;
 
-$(".content").hide();
-
-//Create an instance of the google provider object.
- var provider = new firebase.auth.GoogleAuthProvider();
-
-$(document).on('click', '.signIn', function() {
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-     // This gives you a Google Access Token.
-     var token = result.credential.accessToken;
-     // The signed-in user info.
-     var user = result.user;
-     $('.content').show();
-     loggedIn();
-     
-    });
-    $(this).removeClass('signIn')
-      .addClass('signOut')
-      .html('Sign Out Of Google');
-  });
-
-$(document).on('click', '.signOut', function () {
-    firebase.auth().signOut().then(function() {
-      $('.content').hide();
-    }, function(error) {
-      // An error happened.
-    });
-    $(this).removeClass('signOut')
-      .addClass('signIn')
-      .html('Sign in With Google');
-  });
-
 //Show and update current time. Use setInterval method to update time.
 function displayRealTime() {
 setInterval(function(){
@@ -100,6 +69,7 @@ displayRealTime();
 		return false;
 	}
 
+	//Check that the user enters a number for the Frequency value.
 	else if (isNaN(trainFrequency)) {
     	$("#missing-field").empty();
     	$("#not-military-time").empty();
@@ -107,6 +77,7 @@ displayRealTime();
     	return false;
 	}
 
+	//If form is valid, perform time calculations and add train to the current schedule.
 	else {
 		$("#not-military-time").empty();
 		$("#missing-field").empty();
@@ -136,7 +107,7 @@ displayRealTime();
 	    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
 	    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-		//Create local temporary object for holding employee data
+		//Create local temporary object for holding train data
 		var newTrain = {
 			trainName: trainName,
 			destination: destination,
@@ -150,7 +121,7 @@ displayRealTime();
 		//Save/upload train data to the database.
 		database.ref().push(newTrain);
 
-		//Log everything to console
+		//Log everything to console for debugging purposes.
 		console.log("train name in database: " + newTrain.trainName);
 		console.log("destination in database: " + newTrain.destination);
 		console.log("first train time in database: " + newTrain.firstTrainTime);
@@ -235,14 +206,6 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     tRow.append("<img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'>", trainTd, destTd, trainFrequencyTd, nextTrainTd, tMinutesTillTrainTd);
     // Append the table row to the table body
     $("#schedule-body").append(tRow);
-
- 	// Append the newly created table data to the table row.
-	// $("#schedule-body").append("<tr> <td id='remove'><img src='assets/images/if_trash_1608958.svg' alt='trash can' class='trash-can mr-3'></td> + <td id='name'> " + trainName +
-	// " </td><td id='destination'> " + destination +
-	// " </td><td id='trainFrequency'> " + trainFrequency +
-	// " </td><td id='nextTrain'> " + nextTrain + 
-	// " </td><td id='tMinutesTillTrain'> " + tMinutesTillTrain +" </td></tr>");
-
 });
 
 
@@ -253,15 +216,16 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 	//confirm with the user before he or she decides to actually delete the train data.
 	var confirmDelete = confirm("Deleting a train permanently removes the train from the system. Are you sure you want to delete this train?");
-	//Confirmation modal that appears when user wants to remove train from schedule.
+	//To do: Replace alert with modal... Confirmation modal that appears when user wants to remove train from schedule.
 		//$(".remove-train-modal").html("<p>" + " Deleting a train permanently removes the train from the system. Are you sure you want to delete this train?" + "</p>");
 		//$('#removeTrain').modal();
 	//If user confirms...
 	if (confirmDelete) {
 		//Remove the closest table row.
 		$(this).closest('tr').remove();
-		getKey = $(this).parent().attr('id');
-		console.log(getKey);
+		//To do: Remove train info from db.
+		// getKey = $(this).parent().attr('id');
+		// console.log(getKey);
 		//dataRef.child(key).remove();
 		//database.ref().child(getKey).remove();
 	}

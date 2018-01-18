@@ -40,8 +40,6 @@
 	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
 	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 
-	
-
 </head>
 <body class="bg-secondary">
 
@@ -52,7 +50,7 @@
 					<div class="card-body text-white">
 				    	<h1 class="card-title text-center"><img src="assets/images/if_14_171500.svg" alt="train">myTrainBuilder</h1>
 				    	<h5 class="card-text"></h5>
-				    	<button type="button" class="text-center btn btn-lg signIn">Sign in with Google</button>
+				    	<!--<button type="button" class="text-center btn btn-lg signIn">Sign in with Google</button>-->
 					</div>
 				</div>
 			</div>
@@ -95,23 +93,19 @@
 					<div class="card-body">
 						<form>
 							<div class="form-group">
-								<!--Hover over the help icon to see tooltip-->
 						    	<label for="trainName">Train name <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The name of the train you want to add to the schedule. For example, Milwaukee Railroad."></i></label>
 						    	<input type="text" class="form-control" id="train-name" placeholder="New Haven Railroad">
 						  	</div>
 						  	<div class="form-group">
-						  		<!--Hover over the help icon to see tooltip-->
 						    	<label for="destination">Destination <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
 						    	<input type="text" class="form-control" id="destination" placeholder="Boston, MA">
 						  	</div>
 						  	<div class="form-group">
-						  		<!--Hover over the help icon to see tooltip-->
 						    	<label for="firstTrainTime">First train time (HH:mm - military time) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enter the first time that the train leaves (specify in military time)."></i></label>
 						    	<small id="not-military-time" class="form-validation"></small>
 						    	<input type="text" class="form-control" id="first-train-time" placeholder="HH:mm">
 						  	</div>
 						  	<div class="form-group">
-						  		<!--Hover over the help icon to see tooltip-->
 						    	<label for="firstTrainTime">Frequency (min) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="How often (in minutes) the train leaves."></i></label>
 						    	<small id="not-a-number" class="form-validation"></small>
 						    	<input type="text" class="form-control" id="frequency" placeholder="">
